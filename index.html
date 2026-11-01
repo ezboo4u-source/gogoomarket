@@ -1357,6 +1357,14 @@
         var session = null; // {name,email,industry,region,phone,passwordHash} — 비밀번호 원문은 저장하지 않고, 해시는 이 창을 여는 동안만 메모리에 유지
         var OWNER_EMAIL = "ezboo4u@gmail.com"; // 가격표·독서 게시판 글쓰기는 이 계정으로 로그인했을 때만 열립니다
         function isBoardOwner() { return !!session && String(session.email || "").trim().toLowerCase() === OWNER_EMAIL; }
+        // 이메일 정규화: 전각 @·마침표(＠．)를 반각으로 바꾸고, 모든 공백과
+        // 보이지 않는 문자(제로 너비 공백·BOM 등)를 제거한 뒤 소문자로 통일한다.
+        // 검증·전송 전에 반드시 이 함수를 거친 값을 사용한다.
+        function normalizeEmail(raw) {
+          var value = String(raw == null ? "" : raw);
+          if (value.normalize) value = value.normalize("NFKC");
+          return value.replace(/＠/g, "@").replace(/．/g, ".").replace(/[\s\u200B-\u200D\u2060\uFEFF\u180E\u00AD\u0000-\u001F\u007F]+/g, "").toLowerCase();
+        }
         function sha256Hex(input) {
           var ascii = unescape(encodeURIComponent(String(input)));
           function rr(v, a) { return (v >>> a) | (v << (32 - a)); }
@@ -1456,10 +1464,11 @@
         $("signupForm").addEventListener("submit", function (ev) {
           ev.preventDefault();
           var st = $("signupStatus");
-          var name = $("suName").value.trim(), email = $("suEmail").value.trim().toLowerCase(), pw = $("suPw").value,
+          var name = $("suName").value.trim(), email = normalizeEmail($("suEmail").value), pw = $("suPw").value,
               ind = $("suIndustry").value.trim(), region = $("suRegion").value.trim(), phone = $("suPhone").value.trim();
+          $("suEmail").value = email;
           if (!name || !email || !pw || !ind || !region) return setStatus(st, "이름·이메일·비밀번호·업종·지역을 모두 입력해 주세요.", false);
-          if (!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(email)) return setStatus(st, "이메일 형식을 확인해 주세요.", false);
+          if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return setStatus(st, "이메일 형식을 확인해 주세요.", false);
           if (pw.length < 8) return setStatus(st, "비밀번호는 8자 이상으로 해 주세요.", false);
           if (!$("suTerms").checked || !$("suPrivacy").checked) return setStatus(st, "약관과 개인정보 수집 동의가 필요합니다.", false);
           var btn = $("signupForm").querySelector('button[type="submit"]');
@@ -1477,14 +1486,15 @@
         $("loginForm").addEventListener("submit", function (ev) {
           ev.preventDefault();
           var st = $("loginStatus");
-          var email = $("liEmail").value.trim().toLowerCase(), pw = $("liPw").value;
+          var email = normalizeEmail($("liEmail").value), pw = $("liPw").value;
+          $("liEmail").value = email;
           if (!email || !pw) return setStatus(st, "이메일과 비밀번호를 입력해 주세요.", false);
           var btn = $("loginForm").querySelector('button[type="submit"]');
           btn.disabled = true; setStatus(st, "로그인 정보를 확인하고 있습니다…", true);
           var hash = sha256Hex(pw);
           apiPost({ action: "login", email: email, passwordHash: hash })
             .then(function (data) {
-              session = { name: data.name || "", email: data.email || email, industry: data.industry || "", region: data.region || "", phone: "", passwordHash: hash };
+              session = { name: data.name || "", email: normalizeEmail(data.email || email), industry: data.industry || "", region: data.region || "", phone: "", passwordHash: hash };
               btn.disabled = false; setStatus(st, "", true); renderAuth(); fetchMyBest();
             })
             .catch(function (err) { btn.disabled = false; setStatus(st, err.message, false); });
