@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://gogoomarket.vercel.app/sitemap.xml
+Sitemap: https://saidang.vercel.app/sitemap.xml
