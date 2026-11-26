@@ -1119,17 +1119,7 @@
       /* 게시판 이미지 */
       .board-img { width: 100%; border: 2px solid var(--line); border-radius: 12px; margin-top: 12px; }
 
-      /* ---------- v2: PC 우측 문의 패널 / 모바일 하단 고정 바 ---------- */
-      .side-panel { display: none; }
-      @media (min-width: 1400px) {
-        .side-panel { display: flex; flex-direction: column; gap: 8px; position: fixed; right: 18px; top: 50%; transform: translateY(-50%); z-index: 60; background: var(--surface); border: 2px solid var(--ink); border-radius: 18px; box-shadow: 4px 4px 0 var(--ink); padding: 16px 14px; width: 168px; }
-        .side-panel .sp-title { font-family: "Jua", sans-serif; font-size: 16px; text-align: center; margin-bottom: 2px; }
-        .side-panel a { display: block; text-align: center; text-decoration: none; font-weight: 900; font-size: 14px; padding: 11px 8px; border-radius: 10px; border: 2px solid var(--ink); }
-        .side-panel a.sp-kakao { background: var(--kakao); color: var(--kakao-ink); }
-        .side-panel a.sp-call { background: var(--red); color: #fff; border-color: var(--red-dark); }
-        .side-panel a.sp-price { background: var(--bg-soft); }
-        .side-panel .sp-note { font-size: 12px; color: var(--ink-soft); text-align: center; line-height: 1.5; }
-      }
+      /* ---------- v2: 모바일 하단 고정 바 ---------- */
       .bottom-bar { display: none; }
       @media (max-width: 860px) {
         .bottom-bar { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 70; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: color-mix(in srgb, var(--bg) 94%, transparent); backdrop-filter: blur(8px); border-top: 2px solid var(--line); }
@@ -2340,15 +2330,6 @@
       </section>
 
     </main>
-
-    <!-- PC 우측 문의 패널 -->
-    <aside class="side-panel" aria-label="빠른 문의">
-      <div class="sp-title">빠른 문의</div>
-      <a class="sp-kakao" href="https://open.kakao.com/me/gogoomarket" target="_blank" rel="noopener">💬 카톡 문의</a>
-      <a class="sp-call" href="tel:01046493309">📞 010-4649-3309</a>
-      <a class="sp-price" href="#price">🗓 가격 게시판</a>
-      <div class="sp-note">오후 6시까지 주문<br />당일 밤배송</div>
-    </aside>
 
     <!-- 모바일 하단 고정 바 -->
     <div class="bottom-bar">
