@@ -2240,6 +2240,34 @@
         </div>
       </section>
 
+      <!-- 건의 게시판 -->
+      <section id="suggest" class="alt">
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="sec-tag">건의 게시판 · 누구나 참여</span>
+            <h2 class="display">사이당 건의 게시판</h2>
+            <p>사이당에 있으면 좋겠는 <strong>게임이나 컨텐츠</strong>를 건의해 주세요. 사장님들이 남겨 주신 아이디어를 하나씩 보고, 다음 게임과 컨텐츠를 만들 때 꼭 참고하겠습니다. 목록에서 제목을 누르면 글 내용이 펼쳐집니다.</p>
+          </div>
+          <div class="board-list suggest-list">
+            <div class="board-head" aria-hidden="true"><span>날짜</span><span>제목</span><span>작성자</span></div>
+            <div id="suggestRows">
+              <div class="suggest-empty">건의글을 불러오는 중입니다…</div>
+            </div>
+          </div>
+          <div class="suggest-write">
+            <h3>건의글 쓰기</h3>
+            <p>로그인 없이 누구나 바로 남길 수 있습니다. 어떤 게임·컨텐츠가 있으면 좋을지 편하게 적어 주세요.</p>
+            <form class="admin-form" id="suggestForm">
+              <input type="text" id="sgName" placeholder="이름 또는 닉네임 (선택)" maxlength="20" autocomplete="name" />
+              <input type="text" id="sgTitle" placeholder="제목 (예: 진상 손님 참교육 게임 만들어 주세요)" maxlength="60" required />
+              <textarea id="sgBody" rows="4" placeholder="어떤 게임이나 컨텐츠인지, 어떻게 즐기고 싶은지 적어 주세요." maxlength="1000" required></textarea>
+              <button class="m-btn full" type="submit">건의글 올리기</button>
+              <div class="m-status full" id="suggestStatus" role="status" aria-live="polite"></div>
+            </form>
+          </div>
+        </div>
+      </section>
+
       <!-- 북마크 안내 -->
       <section id="bookmark" class="alt">
         <div class="wrap">
@@ -2279,33 +2307,6 @@
               <a class="btn btn-call" href="tel:01046493309">📞 지금 전화하기</a>
             </div>
             <a class="contact-phone-big" href="tel:01046493309">010-4649-3309</a>
-          </div>
-        </div>
-      </section>
-      <!-- 건의 게시판 -->
-      <section id="suggest" class="alt">
-        <div class="wrap">
-          <div class="sec-head">
-            <span class="sec-tag">건의 게시판 · 누구나 참여</span>
-            <h2 class="display">사이당 건의 게시판</h2>
-            <p>사이당에 있으면 좋겠는 <strong>게임이나 컨텐츠</strong>를 건의해 주세요. 사장님들이 남겨 주신 아이디어를 하나씩 보고, 다음 게임과 컨텐츠를 만들 때 꼭 참고하겠습니다. 목록에서 제목을 누르면 글 내용이 펼쳐집니다.</p>
-          </div>
-          <div class="board-list suggest-list">
-            <div class="board-head" aria-hidden="true"><span>날짜</span><span>제목</span><span>작성자</span></div>
-            <div id="suggestRows">
-              <div class="suggest-empty">건의글을 불러오는 중입니다…</div>
-            </div>
-          </div>
-          <div class="suggest-write">
-            <h3>건의글 쓰기</h3>
-            <p>로그인 없이 누구나 바로 남길 수 있습니다. 어떤 게임·컨텐츠가 있으면 좋을지 편하게 적어 주세요.</p>
-            <form class="admin-form" id="suggestForm">
-              <input type="text" id="sgName" placeholder="이름 또는 닉네임 (선택)" maxlength="20" autocomplete="name" />
-              <input type="text" id="sgTitle" placeholder="제목 (예: 진상 손님 참교육 게임 만들어 주세요)" maxlength="60" required />
-              <textarea id="sgBody" rows="4" placeholder="어떤 게임이나 컨텐츠인지, 어떻게 즐기고 싶은지 적어 주세요." maxlength="1000" required></textarea>
-              <button class="m-btn full" type="submit">건의글 올리기</button>
-              <div class="m-status full" id="suggestStatus" role="status" aria-live="polite"></div>
-            </form>
           </div>
         </div>
       </section>
